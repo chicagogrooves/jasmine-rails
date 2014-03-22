@@ -2,13 +2,24 @@
 <html>
   <head>
     <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
-    <title>Jasmine Specs</title>
-
+    <title>OL Jasmine Specs</title>
     <%= stylesheet_link_tag *jasmine_css_files %>
   </head>
   <body>
     <div id="jasmine_content"></div>
     <%= yield %>
+    <%= javascript_include_tag 'jquery' %>
     <%= javascript_include_tag *jasmine_js_files %>
+    <script>
+    var require = {
+      baseUrl: "assets/"
+    };
+    requirejs(['lib/extensions', 'browser_pie_chart_spec'], function(){
+      console.log("got it.");
+      
+      //works to execute the specs, but not picked up by phantom
+      jasmine.getEnv().execute();
+    });
+    </script>
   </body>
 </html>
